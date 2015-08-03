@@ -1,0 +1,37 @@
+{
+  "name": "3D.holocron.053015",
+  "version": "1.0.0",
+  "description": "3D Holocron Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sunnylam13/3D-Holocron-053015.git"
+  },
+  "keywords": [
+    "cube",
+    "animated",
+    "3D",
+    "image",
+    "gallery"
+  ],
+  "author": "Sunny Lam",
+  "license": "MIT",
+  "homepage": "https://github.com/sunnylam13/3D-Holocron-053015#readme",
+  "devDependencies": {
+    "browser-sync": "^2.7.3",
+    "gulp": "^3.8.11",
+    "gulp-autoprefixer": "^2.3.0",
+    "gulp-concat": "^2.5.2",
+    "gulp-jade": "^1.0.1",
+    "gulp-plumber": "^1.0.1",
+    "gulp-sass": "^2.0.1"
+  },
+  "dependencies": {
+    "gulp": "^3.8.11",
+    "gulp-concat": "^2.5.2",
+    "gulp-sass": "^2.0.1"
+  }
+}

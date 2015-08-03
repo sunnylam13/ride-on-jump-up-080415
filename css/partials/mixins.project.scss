@@ -1,0 +1,14 @@
+////////////////////////////////////////////
+///// 		MIXINS PROJECT
+///////////////////////////////////////////////
+
+// all mixins that are not universal ones... that are specific to this project are placed here
+// don't forget to include the $ in front of the variables
+
+@mixin baseParagraphStyle {
+	line-height: $baselineheight*1.66;
+	margin-bottom: 20px;
+	font-size: $basefontsize;
+}
+
+///////////////////////////////////////////////

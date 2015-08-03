@@ -1,0 +1,69 @@
+////////////////////////////////////////////
+// 		SETUP STUFF
+////////////////////////////////////////////
+
+
+////////////////////////////////////////////
+// 		IMPORTS
+////////////////////////////////////////////
+
+
+////////////////////////////////////////////
+// 		VARIABLES
+////////////////////////////////////////////
+
+
+////////////////////////////////////////////
+///// 		MIXINS
+///////////////////////////////////////////////
+
+
+////////////////////////////////////////////
+// 		MAIN CODE
+////////////////////////////////////////////
+
+.full-monty {
+	// you must remove the ghost space by zeroing out the margin and padding in these special positioning divs
+	margin: 0;
+	padding: 0;
+	@include column(12);
+}
+
+.one-half {
+	// you must remove the ghost space by zeroing out the margin and padding in these special positioning divs
+	margin: 0;
+	padding: 0;
+	@include column(6);
+}
+
+.one-third {
+	// you must remove the ghost space by zeroing out the margin and padding in these special positioning divs
+	margin: 0;
+	padding: 0;
+	@include column(4);
+}
+
+.one-fourth {
+	// you must remove the ghost space by zeroing out the margin and padding in these special positioning divs
+	margin: 0;
+	padding: 0;
+	@include column(3);
+}
+
+.one-sixth {
+	// you must remove the ghost space by zeroing out the margin and padding in these special positioning divs
+	margin: 0;
+	padding: 0;
+	@include column(2);
+}
+
+// this is used to make sure that blocks on the right edge are flush
+.last {
+	margin-right: 0 !important;
+	clear: right;
+}
+
+.leftFlush {
+	margin-left: 0 !important;
+	clear: left;
+}

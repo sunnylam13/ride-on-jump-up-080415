@@ -1,0 +1,365 @@
+////////////////////////////////////////////////
+// 		VARIABLES
+////////////////////////////////////////////////
+
+////////////////////////////////////////////////
+// 		MIXINS
+////////////////////////////////////////////////
+
+// remember to start from largest width to smallest width
+
+@mixin phoneR {
+	// Landscape phones and down
+	@media (max-width: 480px) {
+		@content;
+	}
+}
+
+@mixin phoneLandR {
+	@media (max-width: 480px) and (orientation: landscape) {
+		@content;
+	}
+}
+
+@mixin phonePortR {
+	@media (max-width: 480px) and (orientation: portrait) {
+		@content;
+	}
+}
+
+@mixin phabletR {
+	// Landscape phone to portrait tablet
+	@media (max-width: 720px) {
+		@content;
+	}
+}
+
+@mixin phabletLandR {
+	@media (max-width: 720px) and (orientation: landscape) {
+		@content;
+	}
+}
+
+@mixin phabletPortR {
+	@media (max-width: 720px) and (orientation: portrait) {
+		@content;
+	}
+}
+
+@mixin tabletR {
+	// Landscape phone to portrait tablet
+	@media (max-width: 768px) {
+		@content;
+	}
+}
+
+@mixin tabletLandR {
+	@media (max-width: 768px) and (orientation: landscape) {
+		@content;
+	}
+}
+
+@mixin tabletPortR {
+	@media (max-width: 768px) and (orientation: portrait) {
+		@content;
+	}
+}
+
+@mixin desktopR {
+	// Portrait tablet and small desktops
+	@media (max-width: 940px) {
+		@content;
+	}
+}
+
+@mixin desktopR1024 {
+	// Portrait tablet and small desktops
+	@media (max-width: 1024px) {
+		@content;
+	}
+}
+
+@mixin desktopRHD {
+	// large desktops
+	@media (min-width: 940px) {
+		@content;
+	}
+}
+
+@mixin desktopRHD940t1024 {
+	// large desktops
+	@media (min-width: 940px) and (max-width: 1024px) {
+		@content;
+	}
+}
+
+@mixin desktopRHD1024 {
+	// large desktops
+	@media (min-width: 1024px) {
+		@content;
+	}
+}
+
+@mixin desktopRHD1280Max {
+	// large desktops
+	@media (max-width: 1280px) {
+		@content;
+	}
+}
+
+@mixin desktopRHD1280 {
+	// large desktops
+	@media (min-width: 1280px) {
+		@content;
+	}
+}
+
+@mixin desktopRHD1024t1280 {
+	// large desktops
+	@media (min-width: 1024px) and (max-width: 1280px) {
+		@content;
+	}
+}
+
+@mixin desktopRHD1280Plus {
+	// large desktops
+	@media (min-width: 1280px) {
+		@content;
+	}
+}
+
+// custom media queries
+
+@mixin phoneMenuItemsR {
+	@media (min-width: 481px) {
+		@content;
+	}
+}
+
+@mixin phabletSpecial032615V1 {
+	@media (min-width:720px) and (max-width: 768px) and (orientation: landscape) {
+		@content;
+	}
+}
+
+////////////////////////////////////////////
+///// 		APPLE MEDIA QUERIES
+///////////////////////////////////////////////
+
+// http://www.paintcodeapp.com/news/ultimate-guide-to-iphone-resolutions
+
+@mixin applewatch42mm272R {
+	// Applewatch 42mm 340x272
+	@media (max-width: 272px) {
+		@content;
+	}
+}
+
+@mixin applewatch42mm312R {
+	// Applewatch 42mm 390x312
+	@media (max-width: 312px) {
+		@content;
+	}
+}
+
+@mixin iphone6Minus320R {
+	@media (max-width: 320px) {
+		@content;
+	}
+}
+
+@mixin iphone6Minus320LandR {
+	@media (max-width: 320px) and (orientation:landscape) {
+		@content;
+	}
+}
+
+@mixin iphone6Minus320PortR {
+	@media (max-width: 320px) and (orientation:portrait) {
+		@content;
+	}
+}
+
+@mixin applewatch38mmR {
+	// Applewatch 42mm 340x272
+	@media (max-width: 340px) {
+		@content;
+	}
+}
+
+@mixin applewatch38mmLandR {
+	// Applewatch 42mm 340x272
+	@media (max-width: 340px) and (orientation:landscape) {
+		@content;
+	}
+}
+
+@mixin applewatch38mmPortR {
+	// Applewatch 42mm 340x272
+	@media (max-width: 340px) and (orientation:portrait) {
+		@content;
+	}
+}
+
+@mixin iphone6Plus375R {
+	@media (max-width: 375px) {
+		@content;
+	}
+}
+
+@mixin iphone6Plus375LandR {
+	@media (max-width: 375px) and (orientation:landscape) {
+		@content;
+	}
+}
+
+@mixin iphone6Plus375PortR {
+	@media (max-width: 375px) and (orientation:portrait) {
+		@content;
+	}
+}
+
+@mixin applewatch42mmR {
+	// Applewatch 42mm 390x312
+	@media (max-width: 390px) {
+		@content;
+	}
+}
+
+@mixin applewatch42mmLandR {
+	// Applewatch 42mm 390x312
+	@media (max-width: 390px) and (orientation:landscape) {
+		@content;
+	}
+}
+
+@mixin applewatch42mmPortR {
+	// Applewatch 42mm 390x312
+	@media (max-width: 390px) and (orientation:portrait) {
+		@content;
+	}
+}
+
+@mixin iphone6Plus414R {
+	@media (max-width: 414px) {
+		@content;
+	}
+}
+
+@mixin iphone6Plus414LandR {
+	@media (max-width: 414px) and (orientation:landscape) {
+		@content;
+	}
+}
+
+@mixin iphone6Plus414PortR {
+	@media (max-width: 414px) and (orientation:portrait) {
+		@content;
+	}
+}
+
+@mixin iphone6Minus568R {
+	@media (max-width: 568px) {
+		@content;
+	}
+}
+
+@mixin iphone6Minus568LandR {
+	@media (max-width: 568px) and (orientation:landscape) {
+		@content;
+	}
+}
+
+@mixin iphone6Minus568PortR {
+	@media (max-width: 568px) and (orientation:portrait) {
+		@content;
+	}
+}
+
+@mixin iphone6Plus667R {
+	@media (max-width: 667px) {
+		@content;
+	}
+}
+
+@mixin iphone6Plus667LandR {
+	@media (max-width: 667px) and (orientation:landscape) {
+		@content;
+	}
+}
+
+@mixin iphone6Plus667PortR {
+	@media (max-width: 667px) and (orientation:portrait) {
+		@content;
+	}
+}
+
+@mixin iphone6Plus736R {
+	@media (max-width: 736px) {
+		@content;
+	}
+}
+
+@mixin iphone6Plus736LandR {
+	@media (max-width: 736px) and (orientation:landscape) {
+		@content;
+	}
+}
+
+@mixin iphone6Plus736PortR {
+	@media (max-width: 736px) and (orientation:portrait) {
+		@content;
+	}
+}
+
+@mixin ipadAir1024R {
+	@media (max-width: 1024px) {
+		@content;
+	}
+}
+
+@mixin ipadAir1024LandR {
+	@media (max-width: 1024px) and (orientation:landscape) {
+		@content;
+	}
+}
+
+@mixin ipadAir1024PortR {
+	@media (max-width: 1024px) and (orientation:portrait) {
+		@content;
+	}
+}
+
+
+
+////////////////////////////////////////////
+
+
+////////////////////////////////////////////
+///// 		SAMSUNG MEDIA QUERIES
+///////////////////////////////////////////////
+
+@mixin samsung360 {
+	@media (max-width: 360px) {
+		@content;
+	}
+}
+
+@mixin samsungGalaxyTab600PortR {
+	@media (max-width: 600px) and (orientation:portrait) {
+		@content;
+	}
+}
+
+@mixin samsung640 {
+	@media (max-width: 640px) {
+		@content;
+	}
+}
+
+///////////////////////////////////////////////
+
+
+////////////////////////////////////////////////
+// 		MAIN CODE
+////////////////////////////////////////////////

@@ -1,0 +1,189 @@
+////////////////////////////////////////////
+///// 		IMPORTS
+///////////////////////////////////////////////
+	@import url("http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css");
+	// <link href='http://fonts.googleapis.com/css?family=Lato:400,700,900' rel='stylesheet' type='text/css'>
+	// font-family: 'Lato', sans-serif;
+	// @import url("http://fonts.googleapis.com/css?family=Lato:400,700,900");
+
+	// <link href='http://fonts.googleapis.com/css?family=Open+Sans:600,700,800,400' rel='stylesheet' type='text/css'>
+	// font-family: 'Open Sans', sans-serif;
+	@import url("http://fonts.googleapis.com/css?family=Open+Sans:600,700,800,400");
+
+	// <link href='http://fonts.googleapis.com/css?family=Playfair+Display:700italic' rel='stylesheet' type='text/css'>
+	// @import url("http://fonts.googleapis.com/css?family=Playfair+Display:700italic");
+
+	// <link href='http://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+	@import url("http://fonts.googleapis.com/css?family=Kaushan+Script");
+///////////////////////////////////////////////
+///// 		END IMPORTS
+///////////////////////////////////////////////
+
+////////////////////////////////////////////
+// 		ADDITIONAL TYPOGRAPHY DEFAULTS
+////////////////////////////////////////////
+	// from my non-WP template
+
+	html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, main, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+		border: 0;
+		outline: 0;
+		font-size: 100%;
+		font: inherit;
+		vertical-align: baseline;
+		margin: 0;
+		padding: 0; 
+		background: transparent;
+	}
+
+	body {
+		font-family: $font__main;
+		@include font-size(1);
+		@include line-height(1.2);
+		background: $color__background-body;
+		position: relative;
+		// z-index: 10;
+		color: $color__text-main;
+	}
+
+	.wrapper {
+		max-width: 1200px;
+		max-width: $width-wrapper;
+		margin: 0 auto;
+		position: relative;
+		// z-index: 10;
+	}
+
+	ol, ul {
+		list-style: none;
+		// lists have mysterious padding
+		@include marginPaddingReset1;
+	}
+
+	// for some mysterious reason a dot kept appearing in the header fixed nav menu so I decided to set that global li's would be default list-style-type: none unless specified otherwise.
+
+	li {
+		list-style-type: none;
+	}
+
+	p {
+		// to adjust this change the mixin
+		// @include baseParagraphStyle;
+		color: $color__text-main;
+		@include font-size(0.9);
+		margin-bottom: 1.5%;
+	}
+
+	a {
+		text-decoration: none;
+		color: $color__text-main;
+		@include transitionEffectAllEaseIn(0.3s);
+		&:hover {
+			color: $color__ht-links;
+		}
+	}
+
+	ul, span {
+		@include marginPaddingReset1;
+		@include font-size(0.9);
+	}
+
+	progress {
+		/* Reset the default appearance */
+		-webkit-appearance: none;
+		appearance: none;
+	}
+
+	// remove default styling of buttons
+	button {
+		outline: none;
+		border: none;
+		background: none;
+		box-shadow: none;
+		text-shadow: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	// blockquote won't work unless it's inside something else especially to see the quote icon
+	// NOTE:  we've also created a mixin for other situations
+	blockquote {
+		position: relative;
+		color: $color__text-blockquote;
+		padding-left: 3em;
+		font-style: italic;
+		@include sectionMargins041515(6em,4em);
+		
+		// blockquote text is actually wrapped by p element
+		p {
+			color: $color__text-blockquote;
+			color: white;
+			padding: 0 7em 0 4em;
+		}
+		&::before {
+			position: absolute;
+			@include beforeAfterIconPlace042215a('\f10d');
+			@include font-size(3.6);
+			top: -1.3em;
+			left: 0.3em;
+		}
+		// the addition for ::after
+		&::after {
+			position: absolute;
+			@include beforeAfterIconPlace042215a('\f10e');
+			@include font-size(3.6);
+			bottom: -0.5em;
+			right: -0.1em;
+		}
+	}
+
+	code {
+		// converting to an inline block and then apply margin-left works
+		display: inline-block;
+		@include marginPaddingReset1;
+		// margin-left: 3em; // using margin-left for inline code messes things up
+	  background-color:#EEEEEE;
+	  color: black;
+	  color: lighten(black,35%);
+	  font-family: $font__code;
+	}
+
+	pre {
+		font-family: $font__pre;
+		color: lighten(black,35%);
+	}
+
+////////////////////////////////////////////
+// 		END ADDITIONAL TYPOGRAPHY DEFAULTS
+////////////////////////////////////////////
+
+////////////////////////////////////////////
+///// 		HEADINGS
+///////////////////////////////////////////////
+
+	h1 {
+		@include font-size(2.5);
+	}
+
+	h2 {
+		@include font-size(2);
+	}
+
+	h3 {
+		@include font-size(1.5);
+	}
+
+	h4 {
+		@include font-size(1);
+	}
+
+	h5 {
+		@include font-size(0.9);
+	}
+
+	h6 {
+		@include font-size(0.8);
+	}
+
+///////////////////////////////////////////////
+///// 		END HEADINGS
+///////////////////////////////////////////////

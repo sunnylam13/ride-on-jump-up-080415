@@ -1,0 +1,161 @@
+//- ===================================
+//- 		MIXINS UNIVERSAL
+//- ===================================
+
+//- ===================================
+//- 		LINKS
+//- ===================================
+
+mixin linkTemplate033115a(eleName,linkURL)
+	//- this is for use with lists only
+	if block
+		block
+	else
+		li
+			a(href=linkURL)=eleName
+
+mixin linkTemplate042115a(eleName,linkURL)
+	//- this is for general use
+	if block
+		block
+	else
+		a(href=linkURL)=eleName
+
+//- END LINKS
+
+
+//- ===================================
+//- 		IMAGES
+//- ===================================
+
+mixin imgInsertTemplate042215a(imgLink,altText)
+	//- NOT FOR LISTS
+	//- this does regular images that are no in any list
+	if block
+		block
+	else
+		img(src=imgLink, alt=altText)
+
+mixin imgLinkTemplate042315a(imgLink,altText,linkURL)
+	//- this is for general use
+	if block
+		block
+	else
+		a(href=linkURL)
+			img(src=imgLink, alt=altText)
+
+mixin imgInsertTemplate(imgLink,altText)
+	//- FOR LISTS
+	//- this does li images as part of a ul or ol list
+	if block
+		block
+	else
+		li
+			img(src=imgLink, alt=altText)
+
+//- END IMAGES
+
+
+//- ===================================
+//- 		LABELS
+//- ===================================
+
+mixin labelForSubMenus040115a(subMenuLabel,labelText)
+	//- where subMenuLabel is the name set for the input#subMenuLabel and is a string i.e. 'toggle'
+	if block
+		block
+	else
+		li
+			label(for=subMenuLabel)=labelText
+
+//- END LABELS
+
+
+//- ===================================
+//- 		BUTTONS USING <a>
+//- ===================================
+
+mixin standardLinkButton041415a(buttonText,imgLink,classLabel,idLabel)
+	//- This one is used for link buttons that you click and hover over
+	if block
+		block
+	else
+		a(href=imgLink,class=classLabel,id=idLabel)=buttonText
+
+//- END BUTTONS USING <a>
+
+
+
+//- ===================================
+//- 		BUTTONS USING <button>
+//- ===================================
+
+mixin standardButton041415a(buttonText,imgLink,classLabel,idLabel)
+	//- This one is used for link buttons that you click and hover over
+	//- You could re-write the button to have an a element within it or wrap the element in an a tag... in that case you can pass the var imgLink
+	if block
+		block
+	else
+		button(name=buttonText,class=classLabel,id=idLabel)=buttonText
+
+//- END BUTTONS USING <button>
+
+
+
+//- ===================================
+//- 		ICONS
+//- ===================================
+
+mixin iconLink042115a(fontAwesome,linkURL)
+	//- the anchor <a> link has a span inside of it instead of an image
+	//- fontAwesome = you must provide a string value for the selected Font Awesome icon
+	if block
+		block
+	else
+		li
+			a(href=linkURL)
+				span(class=fontAwesome).fa
+
+mixin iconLink042315a(fontAwesome,linkURL)
+	//- the anchor <a> link has a span inside of it instead of an image
+	//- fontAwesome = you must provide a string value for the selected Font Awesome icon
+	if block
+		block
+	else
+		a(href=linkURL)
+			span(class=fontAwesome).fa
+
+mixin iconLink042115b(fontAwesome,linkURL,tagName)
+	//- the anchor <a> link has a span inside of it instead of an image
+	//- fontAwesome = you must provide a string value for the selected Font Awesome icon
+	//- tagName = name of the tag
+	//- This version provides an actual name tag under the icon
+	//- This can be used in other projects.
+	if block
+		block
+	else
+		li
+			a(href=linkURL)
+				span(class=fontAwesome).fa
+			p.tag=tagName
+
+mixin iconLink042315a(fontAwesome,linkURL,tagName)
+	//- the anchor <a> link has a span inside of it instead of an image
+	//- fontAwesome = you must provide a string value for the selected Font Awesome icon
+	//- tagName = name of the tag
+	//- This version provides an actual name tag under the icon
+	//- This can be used in other projects.
+	if block
+		block
+	else
+		div
+			a(href=linkURL)
+				span(class=fontAwesome).fa
+			p.tag=tagName
+
+
+//- END ICONS
+
+
+
+//- END MIXINS UNIVERSAL

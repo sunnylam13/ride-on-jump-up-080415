@@ -1,0 +1,195 @@
+////////////////////////////////////////////
+///// 		MIXINS
+///////////////////////////////////////////////
+
+@mixin line-height($sizeValue: 1) {
+	// moved this mixin before font-size mixin so that it could be used within it
+	// this is based on Andrea Croft's suggestions
+	@if $sizeValue < 1 {
+		$sizeValue: 1;
+	}
+	@if $sizeValue >= 1 {
+		$sizeValue: $sizeValue*1.5;
+	}
+
+	line-height: ($sizeValue * 16) * 1px;
+	line-height: $sizeValue * 1rem;
+}
+
+// Rem output with px fallback
+@mixin font-size($sizeValue: 1) {
+	font-size: ($sizeValue * 16) * 1px;
+	font-size: $sizeValue * 1rem;
+	@include line-height($sizeValue);
+}
+
+// Center block
+@mixin center-block {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+// Clearfix
+@mixin clearfix() {
+	content: "";
+	display: table;
+}
+
+// Clear after (not all clearfix need this also)
+@mixin clearfix-after() {
+	clear: both;
+}
+
+@mixin transitionEffectAll ($time) {
+	-webkit-transition: all $time;
+	-moz-transition: all $time;
+	-o-transition: all $time;
+	-ms-transition: all $time;
+}
+
+@mixin transitionEffectAllEaseIn ($time) {
+	-webkit-transition: all $time ease-in;
+	-moz-transition: all $time ease-in;
+	-o-transition: all $time ease-in;
+	-ms-transition: all $time ease-in;
+}
+
+@mixin transitionEffectAllEaseOut ($time) {
+	-webkit-transition: all $time ease-out;
+	-moz-transition: all $time ease-out;
+	-o-transition: all $time ease-out;
+	-ms-transition: all $time ease-out;
+}
+
+@mixin boxShadow ($hor,$ver,$blur,$colour) {
+	// where $hor, $ver, $blur are in #px
+	-webkit-box-shadow: $hor $ver $blur $colour;
+	-moz-box-shadow: $hor $ver $blur $colour;
+	-o-box-shadow: $hor $ver $blur $colour;
+	box-shadow: $hor $ver $blur $colour;
+}
+
+@mixin boxShadow042215a ($hor,$ver,$blur,$spread,$colour) {
+	// where $hor, $ver, $blur are in #px
+	-webkit-box-shadow: $hor $ver $blur $spread $colour;
+	-moz-box-shadow: $hor $ver $blur $spread $colour;
+	-o-box-shadow: $hor $ver $blur $spread $colour;
+	box-shadow: $hor $ver $blur $colour $spread;
+}
+
+@mixin transformRotate ($degrees) {
+	// where $degrees is x deg
+	-webkit-transform: rotate($degrees);
+	-moz-transform: rotate($degrees);
+	-o-transform: rotate($degrees);
+	-ms-transform: rotate($degrees);
+	transform: rotate($degrees);
+}
+
+@mixin transformRotateScale ($degrees,$scaleMult) {
+	// where $degrees is x deg
+	// where $scaleMult is a number like 2 or 3 with no units
+	-webkit-transform: rotate($degrees) scale($scaleMult);
+	-moz-transform: rotate($degrees) scale($scaleMult);
+	-o-transform: rotate($degrees) scale($scaleMult);
+	-ms-transform: rotate($degrees) scale($scaleMult);
+	transform: rotate($degrees) scale($scaleMult);
+}
+
+// PERSONAL FAVOURITES  ------------------------------------------------
+
+@mixin borderSetup042215a ($thick,$state,$colour) {
+	// this is for a very basic border
+	// $state is something like solid, dotted, etc.
+	border: $thick $state $colour;
+}
+
+@mixin flexboxRow1 {
+	// ROW
+	// this is used within a parent without the class .flexbox... the actual class name used will vary
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-around;
+	align-content: space-around;
+	align-items: center;
+}
+
+@mixin flexboxColumn1 {
+	// COLUMN
+	// this is used within a parent without the class .flexbox... the actual class name used will vary
+	display: flex;
+	flex-flow: column;
+	justify-content: space-around;
+	align-content: center;
+	// align-items:  flex-start, center, flex-end
+	align-items: center;
+}
+
+@mixin sectionMargins041515($marginTop, $marginBottom) {
+	// TOP AND BOTTOM
+	// where arguments are a value in px, em or %
+	margin-top: $marginTop;
+	margin-bottom: $marginBottom;
+}
+
+@mixin sectionPadding041515($padTop, $padBottom) {
+	// TOP AND BOTTOM
+	// where arguments are a value in px, em or %
+	padding-top: $padTop;
+	padding-bottom: $padBottom;
+}
+
+@mixin beforeAfterIconPlace042215a($content) {
+	// this must be placed with a ::before or ::after selector block
+	// $content must be a string... in the form of '\f01d'
+	// what will change each time you use it is the Unicode for content: ''
+
+	// to make this work you have to use the FontAwesome font and the content must be the icon's Unicode (available at FA's website)
+	// http://stackoverflow.com/questions/18793428/put-an-icon-after-list-item-with-after-and-font-awesome
+	content: $content;
+	font-family: FontAwesome;
+	font-weight: normal;
+	font-style: normal;
+	margin:0px 10px 0px 0px;
+	text-decoration:none;
+}
+
+@mixin scalePadding042815a($x,$y) {
+	padding: $y $x $y $x;
+}
+
+@mixin scaleMargin042815a($x,$y) {
+	margin: $y $x $y $x;
+}
+
+@mixin marginPaddingReset1 {
+	// reset margin, padding in case
+	margin: 0;
+	padding: 0;
+}
+
+@mixin button-reset-060615 {
+	outline: none;
+	border: none;
+	background: none;
+	box-shadow: none;
+	text-shadow: none;
+	padding: 0;
+	margin: 0;
+}
+
+@mixin csshexagon041715a($borderWidth,$top,$bottom,$left,$right) {
+	// you should insert this within a div of some sort to create this
+	// set no height
+	// if you want a triangle pointing in a specific direction set the colour of the border opposite to it
+	// set all other borders to transparent
+	// EXAMPLE:  @include csshexagon041715a($downArrowBorderWidth,$highlightImage1,transparent,transparent,transparent);
+	width: 0;
+	border-top: $borderWidth solid $top;
+	border-bottom: $borderWidth solid $bottom;
+	border-left: $borderWidth solid $left;
+	border-right: $borderWidth solid $right;
+}
+
+// // END PERSONAL FAVOURITES ------------------------------------------------

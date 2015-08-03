@@ -1,0 +1,21 @@
+html(lang="en")
+	head
+		block title
+		include ./includes/variables.global.041415.1.jade
+		include ./includes/mixins.universal.041415.1.jade
+		include ./includes/mixins.project.041415.1.jade
+		include ./includes/meta.jade
+		include ./includes/links.jade
+	body
+		include ./includes/googleCode.jade
+		
+		//- if needed apply a .wrapper either here or within the individual sections
+
+		block header
+
+		block content
+
+		block footer
+
+		//- currently best practice to include scripts just before end of body
+		include ./includes/scripts.jade
