@@ -163,12 +163,20 @@
 			// done by specifying a collision callback for the platforms
 			this.physics.arcade.collide(this.player,this.platforms,this.setFriction, null, this);
 
+			/* 
+			* In the update function we keep track of the state of the player. 
+			* If they were standing in the previous frame, but are no longer standing, then we know they have either jumped or fallen off the edge of a platform
+			* Standing is defined as being either stood on a platform, or... 
+			* on the bottom of the game world
+			*/
+
 			// Run this AFTER thie collide check, or you won't have blocked/touching set
 			var standing = this.player.body.blocked.down || this.player.body.touching.down;
 
 			this.player.body.velocity.x = 0;
 
 			if (this.cursors.left.isDown) {
+
 				this.player.body.velocity.x = -200;
 
 				if (this.facing !== 'left') {
