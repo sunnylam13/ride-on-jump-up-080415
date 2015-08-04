@@ -4,6 +4,8 @@ This is a simple 2D platform game in the style of Mario brothers that uses Phase
 
 ## LINKS
 
+[Live Demo](http://sunnylam13.github.io/ride-on-jump-up-080415)
+
 [Git Repo](https://github.com/sunnylam13/tanx-phaser-073015)
 
 ## RESOURCES
