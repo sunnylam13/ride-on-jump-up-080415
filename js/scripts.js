@@ -129,7 +129,7 @@
 			*/
 
 			if (platform.key === 'ice-platform') {
-				player.box.x -= platform.body.x - platform.body.prev.x;
+				player.body.x -= platform.body.x - platform.body.prev.x;
 			}
 		},
 
@@ -188,6 +188,8 @@
 
 	}
 
+
+	rideP1.game.state.add('Game',rideP1.PhaserGame,true);
 
 ////////////////////////////////////////////
 // 		END FUNCTIONS
