@@ -1,6 +1,6 @@
-# Ride On Phaser Project 080315
+# Ride On Jump Up Phaser Game 080315
 
-This is s a simple platform game in the style of Mario brothers...
+This is a simple 2D platform game in the style of Mario brothers that uses Phaser JS...
 
 ## LINKS
 
