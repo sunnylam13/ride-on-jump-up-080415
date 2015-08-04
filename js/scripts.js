@@ -66,17 +66,30 @@
 			// ----------------------------------------
 			// PLATFORMS  ------------------
 			// ----------------------------------------
+				
+				/* 
+				* When the player jumps on this type of platform we let Phaser handle the collision. 
+				* Due to the way Arcade Physics works there is a special condition that means that the player will automatically "ride" with the platform. 
+				* So as it moves horizontally the players x position is adjusted to match.
+				* 
+				*/
+
 				// create a new platforms group with physics
+				// the platforms are added to a physics group
 				this.platforms = this.add.physicsGroup();
 
 				// call the proper assets at specific positions
+				// create all 4 platforms
 				this.platforms.create(0,64,'ice-platform');
 				this.platforms.create(200,180,'platform');
 				this.platforms.create(400,296,'ice-platform');
 				this.platforms.create(600,412,'platform');
 
+				// stops gravity from making them fall 
 				this.platforms.setAll('body.allowGravity',false);
+				// if something or someone impacts the platform it doesn't move
 				this.platforms.setAll('body.immovable',true);
+				// gives each platform the same horizontal velocity
 				this.platforms.setAll('body.velocity.x',100);
 			// ----------------------------------------
 			// END PLATFORMS  ------------------
@@ -124,8 +137,15 @@
 
 		setFriction: function (player, platform) {
 			/* 
-			* COMMENT
-			* 
+			* But what if we don't want that to happen? 
+			* What if we want our player to fall off the platform, and not ride it? 
+			* Perhaps the platform is covered in ice? 
+			* For that we'll let the platform set its own friction.
+			*
+			* The conditional checks if the platform is an ice one, and if so adjusts the players body to compensate for the distance the platform has travelled.
+			* Obviously you don't have to check the image key to do this - it would make more sense if you had a special custom Game Object that knew if it was slippery or not, but the end result is the same. 
+			* You need to effectively undo the horizontal drag that was applied by Arcade Physics.
+			* If you run the code you'll see that on the green platforms you can ride them, but on the snow covered ones you slip right off. Perfect.
 			*/
 
 			if (platform.key === 'ice-platform') {
@@ -139,6 +159,8 @@
 			this.platforms.forEach(this.wrapPlatform, this);
 
 			// run a collide/collision check
+			// But what if we don't want that to happen? What if we want our player to fall off the platform, and not ride it? Perhaps the platform is covered in ice? For that we'll let the platform set its own friction.
+			// done by specifying a collision callback for the platforms
 			this.physics.arcade.collide(this.player,this.platforms,this.setFriction, null, this);
 
 			// Run this AFTER thie collide check, or you won't have blocked/touching set
