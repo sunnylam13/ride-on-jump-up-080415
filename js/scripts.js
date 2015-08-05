@@ -209,7 +209,25 @@
 
 		update: function () {
 
-			this.sky.tilePosition.y = -(this.camera.y * 0.7);
+			// ----------------------------------------
+			// BACKGROUND, SCROLLING  ------------------
+			// ----------------------------------------
+				/* 
+				* you want the background to vertically scroll
+				* As the player gets further up the stack of platforms we wanted to make the background scroll. 
+					* To reflect the height they were gaining. 
+					* To do this we used a TileSprite with a vertically repeating texture. 
+					* The TileSprite position was then hooked to the Game Camera in the update function
+					* The minus sign is added because otherwise the background scrolls in the wrong direction to the world.
+					* The * 0.7 is there to make the background scroll slower than the camera. This gives the illusion of a bit more depth to the scrolling. Feel free to change this value - try 0.1 for a really 'distant' scroll. Or even 2.0 for a much faster (than the camera) scroll. Lots of fun to be had here...
+				* 
+				*/
+
+				this.sky.tilePosition.y = -(this.camera.y * 0.7);
+			// ----------------------------------------
+			// END BACKGROUND, SCROLLING  ------------------
+			// ----------------------------------------
+			
 
 			// apply the @method wrapPlatform to each platform in the platforms group using a forEach loop
 			this.platforms.forEach(this.wrapPlatform, this);
@@ -227,6 +245,7 @@
 			*/
 
 			// Run this AFTER thie collide check, or you won't have blocked/touching set
+			// Standing is defined as being either stood on a platform, or on the bottom of the game world
 			var standing = this.player.body.blocked.down || this.player.body.touching.down;
 
 			this.player.body.velocity.x = 0;
@@ -276,6 +295,9 @@
 				* 
 				*/
 				
+				// If they are no longer standing, but were in the previous frame, we give them 250ms to make a jump
+				// The edgeTimer value is checked against the clock - and if the player presses the jump button, and they do so within 250ms of falling, they will still be allowed to perform the jump
+				// It's up to you what values you set for this. 250ms may be too high, or too low, it's very game specific. But it felt "right" for this particular game. Tweak it as you need.
 				if (!standing && this.wasStanding) {
 					this.edgeTimer = this.time.time + 250;
 				}
