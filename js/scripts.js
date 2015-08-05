@@ -15,8 +15,15 @@
 	rideP1.PhaserGame = function () {
 		this.player = null;
 		this.platforms = null;
+		this.sky = null;
+
 		this.facing = 'left';
+
+		// One thing platform games often do is give you a small window of opportunity to still jump, even when you've fallen off the side of a platform. This is implemented in the Jump Up game through the edgeTimer property...
+		this.edgeTimer = 0;
 		this.jumpTimer = 0;
+
+		this.wasStanding = false;
 		this.cursors = null;
 	}
 
@@ -36,8 +43,14 @@
 
 		init: function () {
 			this.game.renderer.renderSession.roundPixels = true;
+
+			this.world.resize(640,2000);
+
+			// enable physics in the game world...
 			this.physics.startSystem(Phaser.Physics.ARCADE);
-			this.physics.arcade.gravity.y = 800;
+
+			this.physics.arcade.gravity.y = 750;
+			this.physics.arcade.skipQuadTree = false;
 		},
 
 		preload: function () {
@@ -51,7 +64,9 @@
 			// this.load.baseURL = 'http://files.phaser.io.s3.amazonaws.com/codingtips/issue003/';
 			// this.load.crossOrigin = 'anonymous';
 			
-			this.load.image('background', 'assets/background.png');
+			// this.load.image('background', 'assets/background.png');
+			this.load.image('trees','assets/trees.png');
+			this.load.image('clouds','assets/clouds.png');
 			this.load.image('platform', 'assets/platform.png');
 			this.load.image('ice-platform', 'assets/ice-platform.png');
 			this.load.spritesheet('dude', 'assets/dude.png', 32, 48);
@@ -61,7 +76,19 @@
 		},
 
 		create: function () {
-			this.add.sprite(0,0,'background');
+
+			// ----------------------------------------
+			// BACKGROUND  ------------------
+			// ----------------------------------------
+				this.stage.backgroundColor = "#2f9acc";
+
+				this.sky = this.add.tileSprite(0,0,640,480,'clouds');
+				this.sky.fixedToCamera = true;
+
+				this.add.sprite(0,1906,'trees');
+			// ----------------------------------------
+			// END BACKGROUND  ------------------
+			// ----------------------------------------
 
 			// ----------------------------------------
 			// PLATFORMS  ------------------
@@ -78,19 +105,38 @@
 				// the platforms are added to a physics group
 				this.platforms = this.add.physicsGroup();
 
-				// call the proper assets at specific positions
-				// create all 4 platforms
-				this.platforms.create(0,64,'ice-platform');
-				this.platforms.create(200,180,'platform');
-				this.platforms.create(400,296,'ice-platform');
-				this.platforms.create(600,412,'platform');
+				var x = 0;
+				var y = 64;
+
+				// generate the proper platforms at specific positions
+
+				for (var i = 0; i < 19; i++) {
+					// if the remainder is 1 generate platform, otherwise generate ice platform
+					var type = i % 2 === 1 ? 'platform' : 'ice-platform';
+					var platform = this.platforms.create(x,y,type);
+
+					// set random speed between 50 and 200
+					platform.body.velocity.x = this.rnd.between(100,150);
+
+					// inverse it?
+					if (Math.random() > 0.5) {
+						platform.body.velocity.x *= -1;
+					}
+
+					x += 200;
+
+					if (x >= 600) {
+						x = 0;
+					}
+
+					y += 104;
+				}
 
 				// stops gravity from making them fall 
 				this.platforms.setAll('body.allowGravity',false);
 				// if something or someone impacts the platform it doesn't move
 				this.platforms.setAll('body.immovable',true);
-				// gives each platform the same horizontal velocity
-				this.platforms.setAll('body.velocity.x',100);
+				
 			// ----------------------------------------
 			// END PLATFORMS  ------------------
 			// ----------------------------------------
@@ -111,6 +157,14 @@
 			// END PLAYER  ------------------
 			// ----------------------------------------
 			
+			// ----------------------------------------
+			// CAMERA  ------------------
+			// ----------------------------------------
+				this.camera.follow(this.player);
+			// ----------------------------------------
+			// END CAMERA  ------------------
+			// ----------------------------------------
+
 			// ----------------------------------------
 			// CONTROLS  ------------------
 			// ----------------------------------------
@@ -154,6 +208,8 @@
 		},
 
 		update: function () {
+
+			this.sky.tilePosition.y = -(this.camera.y * 0.7);
 
 			// apply the @method wrapPlatform to each platform in the platforms group using a forEach loop
 			this.platforms.forEach(this.wrapPlatform, this);
@@ -209,10 +265,32 @@
 				}
 			}
 
-			if (standing && this.cursors.up.isDown && this.time.time > this.jumpTimer) {
-				this.player.body.velocity.y = -500;
-				this.jumpTimer = this.time.time + 750;
-			}
+			// ----------------------------------------
+			// EDGE CHECKING  ------------------
+			// ----------------------------------------
+				/* 
+				* no longer standing on the edge yet were a moment ago...
+				* give player a x ms grace period to jump after falling
+				*
+				* In the update function we keep track of the state of the player. If they were standing in the previous frame, but are no longer standing, then we know they have either jumped or fallen off the edge of a platform
+				* 
+				*/
+				
+				if (!standing && this.wasStanding) {
+					this.edgeTimer = this.time.time + 250;
+				}
+
+				if ((standing || this.time.time <= this.edgeTimer) && this.cursors.up.isDown && this.time.time > this.jumpTimer) {
+					this.player.body.velocity.y = -500;
+					this.jumpTimer = this.time.time + 750;
+				}
+			// ----------------------------------------
+			// END EDGE CHECKING  ------------------
+			// ----------------------------------------
+			
+
+			this.wasStanding = standing;
+
 			// end update
 		}
 
